@@ -7,20 +7,15 @@ public class Grid {
 
     public void setPosition(int row, int col, String name) {
         this.board[row][col] = name;
-        System.out.println(row);
-        System.out.println(col);
-        System.out.println(board[row][col]);
-
-
     }
 
     public String[][] getBoard() {
-        String[][] newBoard=board;
+        String[][] newBoard = board;
         return newBoard;
     }
 
-    public Grid() {
-        boardSize();
+    public Grid(int size) {
+        board = new String[size][size];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 this.board[i][j] = "  ";
@@ -28,29 +23,29 @@ public class Grid {
         }
     }
 
-    public void boardSize() {
-        System.out.println("Enter the size of the board: ");
-        int size = ScannerWrapper.getInt();
-        board = new String[size][size];
-
-    }
 
     public void draw(Player player, OrdinarySnake ordinary) {
 
-        ordinary.move(this);
-        System.out.println("Dice:" + Dice.values()[0]);
-        System.out.println("Health:" + player.getHealth());
-        int row = 0;
-        for (int i = 0; i < 2 * this.board.length - 1; i++) {
+        while (player.getHealth() > 0) {
+            int index = Roll.rollDice();
+            ordinary.move(this);
+            player.steps(this, index);
+            System.out.println("Dice:" + Dice.values()[index]);
+            System.out.println("Health:" + player.getHealth());
+            int row = 0;
+            for (int i = 0; i < 2 * this.board.length - 1; i++) {
 
-            if (i % 2 == 0) {
-                eachRow(row);
-                row++;
-            } else {
-                line();
+                if (i % 2 == 0) {
+                    eachRow(row);
+                    row++;
+                } else {
+                    line();
+                }
+                System.out.println("");
             }
-            System.out.println("");
+            System.out.println("********************************");
         }
+
     }
 
     public void line() {
@@ -69,7 +64,7 @@ public class Grid {
             if (j % 2 == 1) {
                 System.out.print("|");
             } else {
-                System.out.print(this.board[row][j/2]);
+                System.out.print(this.board[row][j / 2]);
             }
 
         }

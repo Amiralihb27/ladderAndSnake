@@ -8,12 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("hello");
-        Snake a=new Snake();
-       // a.move();
+        //Snake a=new Snake();
+        System.out.println("Enter the size of the board: ");
         ScannerWrapper sc=new ScannerWrapper();
-        Grid g=new Grid();
+        int size = ScannerWrapper.getInt();
+        Grid g=new Grid(size);
         Player player=new Player();
+        player.setRow(size-1);
         OrdinarySnake ordinary=new OrdinarySnake();
         g.draw(player,ordinary);
 

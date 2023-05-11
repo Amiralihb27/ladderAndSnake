@@ -55,19 +55,25 @@ public class Snake {
 
     public void move(Grid grid) {
         while (true) {
+            if(this.getTail().getRow()!=-1 && this.getTail().getCol()!=-1){
+                grid.setPosition(this.getTail().getRow(), this.getTail().getCol(),"  ");
+            }
 
-            int tailRow = RandomNumber.randomWithinRange(0, grid.getBoard().length-1);
-            int tailCol = RandomNumber.randomWithinRange(0, grid.getBoard().length-1);
+            int tailRow = RandomHelper.nextInt( grid.getBoard().length-1);
+            int tailCol = RandomHelper.nextInt(  grid.getBoard().length-1);
             if (tailRow < this.getHead().getRow()) {
                 continue;
-            } else if (tailRow == this.getHead().getRow() && tailCol > this.getHead().getCol()) {
+            } else if (tailRow == this.getHead().getRow() && tailCol >= this.getHead().getCol()) {
                 continue;
+            } else if (tailRow >= this.getHead().getRow()) {
+                this.tail.setRow(tailRow);
+                this.tail.setCol(tailCol);
+                grid.setPosition(head.getRow(), head.getCol(), this.headName);
+                grid.setPosition(tailRow,tailCol,this.tailName);
+                break;
             }
-            this.tail.setRow(tailRow);
-            this.tail.setCol(tailCol);
-            grid.setPosition(head.getRow(), head.getCol(), this.headName);
-            grid.setPosition(tailRow,tailCol,this.tailName);
-            break;
+
+
         }
     }
 }

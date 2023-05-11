@@ -14,8 +14,8 @@ public class OrdinarySnake extends Snake {
             int headRow=0;
             int headCol=0;
             while (headRow == 0 && headCol == 0) {
-                headRow = RandomNumber.randomWithinRange(0, grid.getBoard().length-1);
-                headCol = RandomNumber.randomWithinRange(0, 4);
+                headRow =  RandomHelper.nextInt( grid.getBoard().length-1);
+                headCol =  RandomHelper.nextInt( grid.getBoard().length-1);
             }
 
             Point newPoint = new Point(headRow, headCol);
