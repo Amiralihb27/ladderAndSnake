@@ -2,7 +2,7 @@ package ir.ac.kntu.gamelogic;
 
 public class Grid {
 
-    private String board[][];
+    private String [][]board;
 
 
     public void setPosition(int row, int col, String name) {
@@ -18,7 +18,7 @@ public class Grid {
         board = new String[size][size];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                this.board[i][j] = "  ";
+                this.board[i][j] ="  ";
             }
         }
     }
@@ -44,6 +44,9 @@ public class Grid {
                 System.out.println("");
             }
             System.out.println("********************************");
+            if(checkForWin(player)){
+                break;
+            }
         }
 
     }
@@ -69,5 +72,15 @@ public class Grid {
 
         }
 
+    }
+
+    public boolean checkForWin(Player player) {
+        if (this.board[0][board.length-1].equals("* ") || this.board[0][board.length-1].equals(player.getCharacter())) {
+            System.out.println("You Won!!!!!!!!");
+            System.out.println("****************");
+            return true;
+        }else{
+            return false;
+        }
     }
 }

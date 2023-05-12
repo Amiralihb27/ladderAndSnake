@@ -58,10 +58,11 @@ public class ScannerWrapper {
             System.out.print("INPUT: ");
             try {
                 userInput = scanner.nextInt();
-                if (userInput >= lLimit && userInput <= uLimit)
+                if (userInput >= lLimit && userInput <= uLimit) {
                     correctInput = true;
-                else
+                } else {
                     System.out.println("ERROR: Invalid input");
+                }
                 scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("ERROR: Invalid input");
@@ -82,7 +83,6 @@ public class ScannerWrapper {
         boolean correctInput = false;
 
         do {
-            System.out.print("INPUT: ");
             try {
                 userInput = scanner.nextDouble();
                 correctInput = true;
@@ -111,10 +111,12 @@ public class ScannerWrapper {
             System.out.print("INPUT: ");
             try {
                 userInput = scanner.nextDouble();
-                if (userInput >= lLimit && userInput <= uLimit)
+                if (userInput >= lLimit && userInput <= uLimit) {
                     correctInput = true;
-                else
+                } else {
                     System.out.println("ERROR: Invalid input");
+                }
+
                 scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("ERROR: Invalid input");
