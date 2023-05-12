@@ -24,11 +24,12 @@ public class Grid {
     }
 
 
-    public void draw(Player player, OrdinarySnake ordinary) {
+    public void draw(Player player, OrdinarySnake ordinary,KindSnake kind) {
 
+        int index = Roll.choose();
         while (player.getHealth() > 0) {
-            int index = Roll.rollDice();
             ordinary.move(this);
+            kind.move(this);
             player.steps(this, index);
             System.out.println("Dice:" + Dice.values()[index]);
             System.out.println("Health:" + player.getHealth());
@@ -44,8 +45,13 @@ public class Grid {
                 System.out.println("");
             }
             System.out.println("********************************");
-            if(checkForWin(player)){
+            if(checkForEnd(player)){
                 break;
+            }
+            if(index==8){
+                index=Roll.rollDice();
+            }else{
+                index = Roll.choose();
             }
         }
 
@@ -74,9 +80,13 @@ public class Grid {
 
     }
 
-    public boolean checkForWin(Player player) {
+    public boolean checkForEnd(Player player) {
         if (this.board[0][board.length-1].equals("* ") || this.board[0][board.length-1].equals(player.getCharacter())) {
             System.out.println("You Won!!!!!!!!");
+            System.out.println("****************");
+            return true;
+        }else if(player.getHealth()==0){
+            System.out.println("Game over!!!!");
             System.out.println("****************");
             return true;
         }else{

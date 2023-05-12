@@ -3,26 +3,26 @@ package ir.ac.kntu.gamelogic;
 public class OrdinarySnake extends Snake {
 
 
-    public void setPosition() {
-
-
-    }
-
     @Override
     public void move(Grid grid) {
         if (!hasMoved()) {
             int headRow=0;
             int headCol=0;
-            while (headRow == 0 && headCol == 0) {
-                headRow =  RandomHelper.nextInt( grid.getBoard().length-1);
-                headCol =  RandomHelper.nextInt( grid.getBoard().length-1);
+            super.setHeadName("s1");
+            super.setTailName("d1");
+            while (true) {
+                headRow = RandomHelper.nextInt(grid.getBoard().length - 1);
+                headCol = RandomHelper.nextInt(grid.getBoard().length - 1);
+                if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
+                        || headRow == 0 && headCol == 0) {
+                    break;
+                }
+
             }
 
             Point newPoint = new Point(headRow, headCol);
             super.setHead(newPoint);
         }
-        super.setHeadName("s1");
-        super.setTailName("d1");
         super.move(grid);
 
     }

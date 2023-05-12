@@ -16,9 +16,11 @@ public class Main {
         Player player=new Player();
         player.setRow(size-1);
         OrdinarySnake ordinary=new OrdinarySnake();
+        KindSnake kind=new KindSnake();
         AllSnakes allSnakes=new AllSnakes();
         AllSnakes.addSnake(ordinary);
-        g.draw(player,ordinary);
+        AllSnakes.addSnake(kind);
+        g.draw(player,ordinary,kind);
 
     }
 }
