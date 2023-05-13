@@ -20,6 +20,13 @@ public class CreateObject {
             Snake kind=new KindSnake();
             AllSnakes.addSnake(kind);
         }
+        System.out.println("How many Savage snake do you wana have?");
+        int numOfSavage = ScannerWrapper.getInt();
+        for(int i=0;i<numOfSavage;i++){
+            Snake savage=new SavageSnake();
+            AllSnakes.addSnake(savage);
+        }
+
         Player player=new Player();
         player.setRow(size-1);
         g.draw(player);

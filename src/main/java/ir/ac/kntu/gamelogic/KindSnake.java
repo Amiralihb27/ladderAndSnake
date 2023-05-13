@@ -26,6 +26,7 @@ public class KindSnake extends Snake {
             super.setHead(newPoint);
         }
 
+
         setTailPoint(grid);
 
 

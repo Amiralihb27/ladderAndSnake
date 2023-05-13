@@ -51,13 +51,14 @@ public class Player {
 
 
     public void steps(Grid grid, int index) {
-        grid.setPosition(this.row, this.col, this.character);
+        // grid.setPosition(this.row, this.col, this.character);
         if (index % 2 == 0 && index != 8) {
             direction(index, 1, grid);
         } else if (index % 2 == 1) {
             direction(index, 2, grid);
         } else {
             this.health++;
+            grid.setPosition(this.row, this.col, this.character);
         }
     }
 
@@ -104,9 +105,8 @@ public class Player {
                 grid.setPosition(this.row, this.col, "  ");
             }
             this.row = row + steps;
-            isSnake(grid, row, col);
         }
-
+        isSnake(grid, row, col);
     }
 
     public void horizontal(int steps, Grid grid) {
@@ -116,18 +116,21 @@ public class Player {
                 grid.setPosition(this.row, this.col, "  ");
             }
             this.col = this.col + steps;
-            isSnake(grid, row, col);
         }
+        isSnake(grid, row, col);
     }
 
     public void isSnake(Grid grid, int row, int col) {
         for (int i = 0; i < AllSnakes.getSnakes().size(); i++) {
             if (grid.getBoard()[row][col].equals(AllSnakes.getSnakes().get(i).getHeadName())) {
+                //System.out.println("nish khordi!");
                 Point point = find(grid, AllSnakes.getSnakes().get(i).getTailName());
-                System.out.println(point.getRow() + " " + point.getCol());
+                if (isSavage(grid, row, col)) {
+                    this.health = this.health - 1;
+                }
                 grid.setPosition(point.getRow(), point.getCol(), this.character);
-                this.row=point.getRow();
-                this.col=point.getCol();
+                this.row = point.getRow();
+                this.col = point.getCol();
             } else if (i == AllSnakes.getSnakes().size() - 1) {
                 grid.setPosition(this.row, this.col, this.character);
             }
@@ -136,16 +139,30 @@ public class Player {
 
     }
 
+
+    public boolean isSavage(Grid grid, int row, int col) {
+        if (grid.getBoard()[row][col].startsWith("$")) {
+            return true;
+        }
+        return false;
+    }
+
     public Point find(Grid grid, String tailName) {
-        for (int i = 0; i < grid.getBoard().length; i++) {
+        int index = AllSnakes.wichSnake(tailName);
+        int row = AllSnakes.getSnakes().get(index).getTail().getRow();
+        int col = AllSnakes.getSnakes().get(index).getTail().getCol();
+        Point point = new Point(row, col);
+        return point;
+        /*for (int i = 0; i < grid.getBoard().length; i++) {
             for (int j = 0; j < grid.getBoard().length; j++) {
                 if (grid.getBoard()[i][j].equals(tailName)) {
                     Point point = new Point(i, j);
+                    System.out.println(grid.getBoard()[i][j]);
                     return point;
                 }
             }
         }
         Point point = new Point(0, 0);
-        return point;
+        return point;*/
     }
 }

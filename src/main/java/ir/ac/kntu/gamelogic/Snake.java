@@ -19,6 +19,8 @@ public class Snake {
         this.head.setCol(-1);
         this.tail.setRow(-1);
         this.tail.setCol(-1);
+        headName=new String();
+        tailName=new String();
     }
 
     public String getHeadName() {
