@@ -53,7 +53,7 @@ public class Snake {
         this.tail = tail;
     }
 
-    public void move(Grid grid) {
+    public void move(Grid grid,int number) {
         while (true) {
             if(this.getTail().getRow()!=-1 && this.getTail().getCol()!=-1){
                 grid.setPosition(this.getTail().getRow(), this.getTail().getCol(),"  ");

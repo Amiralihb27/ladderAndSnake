@@ -5,16 +5,16 @@ public class KindSnake extends Snake {
 
 
     @Override
-    public void move(Grid grid) {
+    public void move(Grid grid,int number) {
         if (!hasMoved()) {
-            int headRow = 0;
-            int headCol = 0;
-            super.setHeadName("L1");
-            super.setTailName("r1");
+            int headRow = grid.getBoard().length-1;
+            int headCol = grid.getBoard().length-1;
+            super.setHeadName("L"+number);
+            super.setTailName("r"+number);
 
-            while (true) {
-                headRow = RandomHelper.nextInt(grid.getBoard().length - 1);
-                headCol = RandomHelper.nextInt(grid.getBoard().length - 1);
+            while (headCol==grid.getBoard().length-1 || headRow==grid.getBoard().length-1) {
+                headRow = RandomHelper.nextInt(grid.getBoard().length );
+                headCol = RandomHelper.nextInt(grid.getBoard().length );
                 if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
                         || headRow == 0 && headCol == 0) {
                     break;
@@ -37,8 +37,8 @@ public class KindSnake extends Snake {
                 grid.setPosition(this.getTail().getRow(), this.getTail().getCol(),"  ");
             }
 
-            int tailRow = RandomHelper.nextInt( grid.getBoard().length-1);
-            int tailCol = RandomHelper.nextInt(  grid.getBoard().length-1);
+            int tailRow = RandomHelper.nextInt( grid.getBoard().length);
+            int tailCol = RandomHelper.nextInt(  grid.getBoard().length);
             if(!AllSnakes.isOtherSnake(grid,tailRow,tailCol,this.getTailName())) {
                 if (tailRow > this.getHead().getRow()) {
                     continue;

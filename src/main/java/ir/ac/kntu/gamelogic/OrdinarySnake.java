@@ -4,17 +4,17 @@ public class OrdinarySnake extends Snake {
 
 
     @Override
-    public void move(Grid grid) {
+    public void move(Grid grid,int number) {
         if (!hasMoved()) {
-            int headRow=0;
+            int headRow=grid.getBoard().length-1;
             int headCol=0;
-            super.setHeadName("s1");
-            super.setTailName("d1");
-            while (true) {
-                headRow = RandomHelper.nextInt(grid.getBoard().length - 1);
-                headCol = RandomHelper.nextInt(grid.getBoard().length - 1);
+            super.setHeadName("s"+number);
+            super.setTailName("d"+number);
+            while (headRow==grid.getBoard().length-1 && headCol==0) {
+                headRow = RandomHelper.nextInt(grid.getBoard().length );
+                headCol = RandomHelper.nextInt(grid.getBoard().length );
                 if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
-                        || headRow == 0 && headCol == 0) {
+                && headRow!=grid.getBoard().length-1 && headCol!=0) {
                     break;
                 }
 
@@ -23,7 +23,7 @@ public class OrdinarySnake extends Snake {
             Point newPoint = new Point(headRow, headCol);
             super.setHead(newPoint);
         }
-        super.move(grid);
+        super.move(grid,number);
 
     }
 
