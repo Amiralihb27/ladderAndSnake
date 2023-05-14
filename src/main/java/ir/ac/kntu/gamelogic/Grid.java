@@ -32,8 +32,8 @@ public class Grid {
         while (player.getHealth() > 0 || !checkForEnd(player)) {
             snakeMoves();
             if (started) {
-                player.steps(this, index);
                 System.out.println("Dice:" + Dice.values()[index]);
+                player.steps(this, index);
             } else {
                 board[board.length - 1][0] = player.getCharacter();
             }
@@ -65,16 +65,16 @@ public class Grid {
 
     public void snakeMoves() {
         int index = 0;
-        for (int i = 0; i < AllSnakes.getSnakes().size()-1; i++) {
+        for (int i = 0; i < AllSnakes.getSnakes().size() - 1; i++) {
 
             AllSnakes.getSnakes().get(i).move(this, index);
             index++;
             if (!AllSnakes.getSnakes().get(i).getClass().getSimpleName()
                     .equals(AllSnakes.getSnakes().get(i + 1).getClass().getSimpleName())) {
-                index=0;
+                index = 0;
             }
         }
-        int lastSnake=AllSnakes.getSnakes().size()-1;
+        int lastSnake = AllSnakes.getSnakes().size() - 1;
         AllSnakes.getSnakes().get(lastSnake).move(this, index);
     }
 

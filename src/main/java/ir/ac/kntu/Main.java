@@ -2,7 +2,6 @@ package ir.ac.kntu;
 
 import ir.ac.kntu.gamelogic.*;
 
-import java.util.Scanner;
 
 public class Main {
 

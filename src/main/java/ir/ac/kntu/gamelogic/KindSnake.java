@@ -7,16 +7,17 @@ public class KindSnake extends Snake {
     @Override
     public void move(Grid grid,int number) {
         if (!hasMoved()) {
-            int headRow = grid.getBoard().length-1;
-            int headCol = grid.getBoard().length-1;
+            int headRow;
+            int headCol;
             super.setHeadName("L"+number);
             super.setTailName("r"+number);
 
-            while (headCol==grid.getBoard().length-1 || headRow==grid.getBoard().length-1) {
+            while (true) {
                 headRow = RandomHelper.nextInt(grid.getBoard().length );
                 headCol = RandomHelper.nextInt(grid.getBoard().length );
                 if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
-                        || headRow == 0 && headCol == 0) {
+                      && headCol!=0){
+                    //System.out.println(grid.getBoard()[headRow][headCol]);
                     break;
                 }
 
@@ -41,15 +42,16 @@ public class KindSnake extends Snake {
             int tailRow = RandomHelper.nextInt( grid.getBoard().length);
             int tailCol = RandomHelper.nextInt(  grid.getBoard().length);
             if(!AllSnakes.isOtherSnake(grid,tailRow,tailCol,this.getTailName())) {
-                if (tailRow > this.getHead().getRow()) {
+               /* if (tailRow > this.getHead().getRow()) {
                     continue;
                 } else if (tailRow == this.getHead().getRow() && tailCol <= this.getHead().getCol()) {
                     continue;
-                } else if (tailRow <= this.getHead().getRow()) {
+                }*/  if (tailRow < this.getHead().getRow()) {
                     this.getTail().setRow(tailRow);
                     this.getTail().setCol(tailCol);
                     grid.setPosition(getHead().getRow(), getHead().getCol(), this.getHeadName());
                     grid.setPosition(tailRow,tailCol,this.getTailName());
+                   // System.out.println(this.getTailName()+": "+tailRow+" "+tailCol);
                     break;
                 }
             }

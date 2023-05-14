@@ -13,11 +13,11 @@ public class SavageSnake extends Snake {
         int headCol = 0;
         super.setHeadName("$" + number);
         super.setTailName("D" + number);
-        while (headRow == grid.getBoard().length - 1 && headCol == 0) {
+        while (true/*&& headCol == 0*/) {
             headRow = RandomHelper.nextInt(grid.getBoard().length);
             headCol = RandomHelper.nextInt(grid.getBoard().length);
             if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
-                    && headRow != grid.getBoard().length - 1 && headCol != 0) {
+                    && headRow != grid.getBoard().length - 1 /*&& headCol != 0*/) {
                 break;
             }
 

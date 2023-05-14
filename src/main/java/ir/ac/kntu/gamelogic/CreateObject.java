@@ -14,7 +14,7 @@ public class CreateObject {
             Snake ordinary=new OrdinarySnake();
             AllSnakes.addSnake(ordinary);
         }
-        System.out.println("How many ordinary snake do you wana have?");
+        System.out.println("How many kind snake do you wana have?");
         int numOfKind = ScannerWrapper.getInt();
         for(int i=0;i<numOfKind;i++){
             Snake kind=new KindSnake();

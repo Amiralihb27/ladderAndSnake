@@ -10,11 +10,11 @@ public class OrdinarySnake extends Snake {
             int headCol = 0;
             super.setHeadName("s" + number);
             super.setTailName("d" + number);
-            while (headRow == grid.getBoard().length - 1 && headCol == 0) {
+            while (true/*&& headCol == 0*/) {
                 headRow = RandomHelper.nextInt(grid.getBoard().length);
                 headCol = RandomHelper.nextInt(grid.getBoard().length);
                 if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
-                        && headRow != grid.getBoard().length - 1 && headCol != 0) {
+                        && headRow != grid.getBoard().length - 1/* && headCol != 0*/) {
                     break;
                 }
 
@@ -22,6 +22,7 @@ public class OrdinarySnake extends Snake {
 
             Point newPoint = new Point(headRow, headCol);
             super.setHead(newPoint);
+            //System.out.println("ordinary:"+headRow+" "+headCol);
         }
         super.move(grid, number);
 

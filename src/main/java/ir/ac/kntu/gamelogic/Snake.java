@@ -64,15 +64,16 @@ public class Snake {
             int tailRow = RandomHelper.nextInt( grid.getBoard().length);
             int tailCol = RandomHelper.nextInt(  grid.getBoard().length);
             if(!AllSnakes.isOtherSnake(grid,tailRow,tailCol,this.tailName)){
-                if (tailRow < this.getHead().getRow()) {
+                /*if (tailRow < this.getHead().getRow()) {
                     continue;
                 } else if (tailRow == this.getHead().getRow() && tailCol >= this.getHead().getCol()) {
                     continue;
-                } else if (tailRow >= this.getHead().getRow()) {
+                }*/  if (tailRow > this.getHead().getRow()) {
                     this.tail.setRow(tailRow);
                     this.tail.setCol(tailCol);
                     grid.setPosition(head.getRow(), head.getCol(), this.headName);
                     grid.setPosition(tailRow,tailCol,this.tailName);
+                   // System.out.println(this.headName+": "+tailRow+" "+tailCol);
                     break;
                 }
 

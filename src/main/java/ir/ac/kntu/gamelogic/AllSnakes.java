@@ -41,9 +41,9 @@ public class AllSnakes {
         for (int i = 0; i < snakes.size(); i++) {
             headName = AllSnakes.getSnakes().get(i).getHeadName();
             tailName = AllSnakes.getSnakes().get(i).getTailName();
-            if (isTailName(name) && (string.equals(tailName))) {
+          /*  if (isTailName(name) && (string.equals(tailName))) {
                 return false;
-            }else if ((string.equals(headName) || string.equals(tailName)) && index != i) {
+            }*/ if ((string.equals(headName) || string.equals(tailName)) && index != i) {
                 return true;
             }
         }

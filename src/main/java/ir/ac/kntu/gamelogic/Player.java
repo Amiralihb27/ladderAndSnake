@@ -57,7 +57,9 @@ public class Player {
         } else if (index % 2 == 1) {
             direction(index, 2, grid);
         } else {
-            this.health++;
+            if (this.health < 3) {
+                this.health++;
+            }
             grid.setPosition(this.row, this.col, this.character);
         }
     }
@@ -125,6 +127,8 @@ public class Player {
             if (grid.getBoard()[row][col].equals(AllSnakes.getSnakes().get(i).getHeadName())) {
                 //System.out.println("nish khordi!");
                 Point point = find(grid, AllSnakes.getSnakes().get(i).getTailName());
+                System.out.println(grid.getBoard()[row][col] +
+                        " bited you.move to [" + point.getRow() + "," + point.getCol() + "]");
                 if (isSavage(grid, row, col)) {
                     this.health = this.health - 1;
                 }
