@@ -50,12 +50,12 @@ public class Player {
     }
 
 
-    public void steps(Grid grid, int index) {
+    public void steps(Grid grid, int index,AllSnakes allSnakes) {
         // grid.setPosition(this.row, this.col, this.character);
         if (index % 2 == 0 && index != 8) {
-            direction(index, 1, grid);
+            direction(index, 1, grid,allSnakes);
         } else if (index % 2 == 1) {
-            direction(index, 2, grid);
+            direction(index, 2, grid,allSnakes);
         } else {
             if (this.health < 3) {
                 this.health++;
@@ -64,42 +64,42 @@ public class Player {
         }
     }
 
-    public void direction(int index, int steps, Grid grid) {
+    public void direction(int index, int steps, Grid grid,AllSnakes allSnakes) {
         switch (index) {
             case 0:
                 steps *= -1;
-                verticalMove(steps, grid);
+                verticalMove(steps, grid,allSnakes);
                 break;
             case 1:
                 steps *= -1;
-                verticalMove(steps, grid);
+                verticalMove(steps, grid,allSnakes);
                 break;
             case 2:
-                verticalMove(steps, grid);
+                verticalMove(steps, grid,allSnakes);
                 break;
             case 3:
-                verticalMove(steps, grid);
+                verticalMove(steps, grid,allSnakes);
                 break;
             case 4:
                 steps *= -1;
-                horizontal(steps, grid);
+                horizontal(steps, grid,allSnakes);
                 break;
             case 5:
                 steps *= -1;
-                horizontal(steps, grid);
+                horizontal(steps, grid,allSnakes);
                 break;
             case 6:
-                horizontal(steps, grid);
+                horizontal(steps, grid,allSnakes);
                 break;
             case 7:
-                horizontal(steps, grid);
+                horizontal(steps, grid,allSnakes);
                 break;
             default:
                 break;
         }
     }
 
-    public void verticalMove(int steps, Grid grid) {
+    public void verticalMove(int steps, Grid grid,AllSnakes allSnakes) {
 
 
         if (this.row + steps >= 0 && this.row + steps < grid.getBoard().length) {
@@ -108,10 +108,10 @@ public class Player {
             }
             this.row = row + steps;
         }
-        isSnake(grid, row, col);
+        isSnake(grid, row, col,allSnakes);
     }
 
-    public void horizontal(int steps, Grid grid) {
+    public void horizontal(int steps, Grid grid,AllSnakes allSnakes) {
 
         if (this.col + steps >= 0 && this.col + steps < grid.getBoard().length) {
             if (grid.getBoard()[row][col] == this.character) {
@@ -119,14 +119,14 @@ public class Player {
             }
             this.col = this.col + steps;
         }
-        isSnake(grid, row, col);
+        isSnake(grid, row, col,allSnakes);
     }
 
-    public void isSnake(Grid grid, int row, int col) {
-        for (int i = 0; i < AllSnakes.getSnakes().size(); i++) {
-            if (grid.getBoard()[row][col].equals(AllSnakes.getSnakes().get(i).getHeadName())) {
+    public void isSnake(Grid grid, int row, int col, AllSnakes allSnakes) {
+        for (int i = 0; i < allSnakes.getSnakes().size(); i++) {
+            if (grid.getBoard()[row][col].equals(allSnakes.getSnakes().get(i).getHeadName())) {
                 //System.out.println("nish khordi!");
-                Point point = find(grid, AllSnakes.getSnakes().get(i).getTailName());
+                Point point = find(allSnakes.getSnakes().get(i).getTailName(), allSnakes);
                 System.out.println(grid.getBoard()[row][col] +
                         " bited you.move to [" + point.getRow() + "," + point.getCol() + "]");
                 if (isSavage(grid, row, col)) {
@@ -135,7 +135,7 @@ public class Player {
                 grid.setPosition(point.getRow(), point.getCol(), this.character);
                 this.row = point.getRow();
                 this.col = point.getCol();
-            } else if (i == AllSnakes.getSnakes().size() - 1) {
+            } else if (i == allSnakes.getSnakes().size() - 1) {
                 grid.setPosition(this.row, this.col, this.character);
             }
         }
@@ -151,10 +151,10 @@ public class Player {
         return false;
     }
 
-    public Point find(Grid grid, String tailName) {
-        int index = AllSnakes.wichSnake(tailName);
-        int row = AllSnakes.getSnakes().get(index).getTail().getRow();
-        int col = AllSnakes.getSnakes().get(index).getTail().getCol();
+    public Point find(String tailName, AllSnakes allSnakes) {
+        int index = allSnakes.wichSnake(tailName);
+        int row = allSnakes.getSnakes().get(index).getTail().getRow();
+        int col = allSnakes.getSnakes().get(index).getTail().getCol();
         Point point = new Point(row, col);
         return point;
         /*for (int i = 0; i < grid.getBoard().length; i++) {

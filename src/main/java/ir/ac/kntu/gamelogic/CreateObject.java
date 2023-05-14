@@ -12,23 +12,23 @@ public class CreateObject {
         AllSnakes allSnakes=new AllSnakes();
         for(int i=0;i<numOfOrdinary;i++){
             Snake ordinary=new OrdinarySnake();
-            AllSnakes.addSnake(ordinary);
+            allSnakes.addSnake(ordinary);
         }
         System.out.println("How many kind snake do you wana have?");
         int numOfKind = ScannerWrapper.getInt();
         for(int i=0;i<numOfKind;i++){
             Snake kind=new KindSnake();
-            AllSnakes.addSnake(kind);
+            allSnakes.addSnake(kind);
         }
         System.out.println("How many Savage snake do you wana have?");
         int numOfSavage = ScannerWrapper.getInt();
         for(int i=0;i<numOfSavage;i++){
             Snake savage=new SavageSnake();
-            AllSnakes.addSnake(savage);
+            allSnakes.addSnake(savage);
         }
 
         Player player=new Player();
         player.setRow(size-1);
-        g.draw(player);
+        g.draw(player,allSnakes);
     }
 }

@@ -24,16 +24,16 @@ public class Grid {
     }
 
 
-    public void draw(Player player) {
+    public void draw(Player player,AllSnakes allSnakes) {
 
 
         boolean started = false;
         int index = 0;
         while (player.getHealth() > 0 || !checkForEnd(player)) {
-            snakeMoves();
+            snakeMoves(allSnakes);
             if (started) {
                 System.out.println("Dice:" + Dice.values()[index]);
-                player.steps(this, index);
+                player.steps(this, index,allSnakes);
             } else {
                 board[board.length - 1][0] = player.getCharacter();
             }
@@ -63,19 +63,19 @@ public class Grid {
 
     }
 
-    public void snakeMoves() {
+    public void snakeMoves(AllSnakes allSnakes) {
         int index = 0;
-        for (int i = 0; i < AllSnakes.getSnakes().size() - 1; i++) {
+        for (int i = 0; i < allSnakes.getSnakes().size() - 1; i++) {
 
-            AllSnakes.getSnakes().get(i).move(this, index);
+            allSnakes.getSnakes().get(i).move(this, index,allSnakes);
             index++;
-            if (!AllSnakes.getSnakes().get(i).getClass().getSimpleName()
-                    .equals(AllSnakes.getSnakes().get(i + 1).getClass().getSimpleName())) {
+            if (!allSnakes.getSnakes().get(i).getClass().getSimpleName()
+                    .equals(allSnakes.getSnakes().get(i + 1).getClass().getSimpleName())) {
                 index = 0;
             }
         }
-        int lastSnake = AllSnakes.getSnakes().size() - 1;
-        AllSnakes.getSnakes().get(lastSnake).move(this, index);
+        int lastSnake = allSnakes.getSnakes().size() - 1;
+        allSnakes.getSnakes().get(lastSnake).move(this, index,allSnakes);
     }
 
     public void line() {
@@ -102,7 +102,8 @@ public class Grid {
     }
 
     public boolean checkForEnd(Player player) {
-        if (this.board[0][board.length - 1].equals("* ") || this.board[0][board.length - 1].equals(player.getCharacter())) {
+        if (this.board[0][board.length - 1].equals("* ")
+                || this.board[0][board.length - 1].equals(player.getCharacter())) {
             System.out.println("You Won!!!!!!!!");
             System.out.println("****************");
             return true;

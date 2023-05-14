@@ -12,15 +12,15 @@ public class Snake {
 
     private String tailName;
 
-    public Snake(){
-        this.head=new Point();
-        this.tail=new Point();
+    public Snake() {
+        this.head = new Point();
+        this.tail = new Point();
         this.head.setRow(-1);
         this.head.setCol(-1);
         this.tail.setRow(-1);
         this.tail.setCol(-1);
-        headName=new String();
-        tailName=new String();
+        headName = new String();
+        tailName = new String();
     }
 
     public String getHeadName() {
@@ -55,25 +55,26 @@ public class Snake {
         this.tail = tail;
     }
 
-    public void move(Grid grid,int number) {
+    public void move(Grid grid, int number, AllSnakes allSnakes) {
         while (true) {
-            if(this.getTail().getRow()!=-1 && this.getTail().getCol()!=-1){
-                grid.setPosition(this.getTail().getRow(), this.getTail().getCol(),"  ");
+            if (this.getTail().getRow() != -1 && this.getTail().getCol() != -1
+                    && grid.getBoard()[this.getTail().getRow()][this.getTail().getCol()].equals(this.getTailName())) {
+                grid.setPosition(this.getTail().getRow(), this.getTail().getCol(), "  ");
             }
 
-            int tailRow = RandomHelper.nextInt( grid.getBoard().length);
-            int tailCol = RandomHelper.nextInt(  grid.getBoard().length);
-            if(!AllSnakes.isOtherSnake(grid,tailRow,tailCol,this.tailName)){
+            int tailRow = RandomHelper.nextInt(grid.getBoard().length);
+            int tailCol = RandomHelper.nextInt(grid.getBoard().length);
+            if (!allSnakes.isOtherSnake(grid, tailRow, tailCol, this.tailName)) {
                 /*if (tailRow < this.getHead().getRow()) {
                     continue;
                 } else if (tailRow == this.getHead().getRow() && tailCol >= this.getHead().getCol()) {
                     continue;
-                }*/  if (tailRow > this.getHead().getRow()) {
+                }*/
+                if (tailRow > this.getHead().getRow()) {
                     this.tail.setRow(tailRow);
                     this.tail.setCol(tailCol);
                     grid.setPosition(head.getRow(), head.getCol(), this.headName);
-                    grid.setPosition(tailRow,tailCol,this.tailName);
-                   // System.out.println(this.headName+": "+tailRow+" "+tailCol);
+                    grid.setPosition(tailRow, tailCol, this.tailName);
                     break;
                 }
 

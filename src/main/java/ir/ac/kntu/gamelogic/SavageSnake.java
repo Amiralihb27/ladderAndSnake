@@ -4,19 +4,20 @@ public class SavageSnake extends Snake {
 
 
     @Override
-    public void move(Grid grid, int number) {
+    public void move(Grid grid, int number, AllSnakes allSnakes) {
 
-        if (hasMoved()) {
+        if (hasMoved()
+                && grid.getBoard()[super.getHead().getRow()][super.getHead().getCol()].equals(super.getHeadName())) {
             grid.getBoard()[super.getHead().getRow()][super.getHead().getCol()] = "  ";
         }
-        int headRow = grid.getBoard().length - 1;
-        int headCol = 0;
+        int headRow;
+        int headCol;
         super.setHeadName("$" + number);
         super.setTailName("D" + number);
         while (true/*&& headCol == 0*/) {
             headRow = RandomHelper.nextInt(grid.getBoard().length);
             headCol = RandomHelper.nextInt(grid.getBoard().length);
-            if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
+            if (!allSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
                     && headRow != grid.getBoard().length - 1 /*&& headCol != 0*/) {
                 break;
             }
@@ -24,7 +25,7 @@ public class SavageSnake extends Snake {
         }
         Point newPoint = new Point(headRow, headCol);
         super.setHead(newPoint);
-        super.move(grid, number);
+        super.move(grid, number, allSnakes);
 
     }
 

@@ -4,7 +4,7 @@ public class OrdinarySnake extends Snake {
 
 
     @Override
-    public void move(Grid grid, int number) {
+    public void move(Grid grid, int number,AllSnakes allSnakes) {
         if (!hasMoved()) {
             int headRow = grid.getBoard().length - 1;
             int headCol = 0;
@@ -13,7 +13,7 @@ public class OrdinarySnake extends Snake {
             while (true/*&& headCol == 0*/) {
                 headRow = RandomHelper.nextInt(grid.getBoard().length);
                 headCol = RandomHelper.nextInt(grid.getBoard().length);
-                if (!AllSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
+                if (!allSnakes.isOtherSnake(grid, headRow, headCol, this.getHeadName())
                         && headRow != grid.getBoard().length - 1/* && headCol != 0*/) {
                     break;
                 }
@@ -24,7 +24,7 @@ public class OrdinarySnake extends Snake {
             super.setHead(newPoint);
             //System.out.println("ordinary:"+headRow+" "+headCol);
         }
-        super.move(grid, number);
+        super.move(grid, number,allSnakes);
 
     }
 
